@@ -20,8 +20,8 @@ header {
   align-items: center;
   background: hsla(33, 95%, 94%, 1);
   & > * {
-    padding-right: 0.6em;
-    padding-left: 0.6em;
+    padding-right: 1.5vw;
+    padding-left: 1.5vw;
     font-size: 1.25em;
   }
 }
@@ -41,6 +41,7 @@ h1 {
   padding: 1em;
   border-radius: 10px;
   margin: 0 auto;
+  overflow: scroll;
 }
 
 .select-js-method {
@@ -49,8 +50,8 @@ h1 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 1em;
-  margin: 1vw auto;
+  padding: 1rem;
+  margin: 0.5rem auto 0;
   font-size: 1.25em;
   p {
     margin: 0;
@@ -60,16 +61,17 @@ h1 {
   }
 }
 
-.initiate {
-  background: hsla(33, 55%, 97%, 1);
-  width: 80vw;
+.js-method-buttons {
+  display: flex;
+  flex-direction: column;
 }
 
 .button {
-  font-size: 1.25em;
-  padding: 0.35em;
+  font-size: 1.25rem;
+  padding: 0.75rem;
   border-radius: 3px;
-  margin: 0.25em;
+  margin: 0.25rem;
+  max-width: 75vw;
   &--bad {
     background: hsla(0, 100%, 97%, 1);
     border: 1px solid hsla(0, 100%, 80%, 1);
@@ -88,12 +90,28 @@ h1 {
       color: white;
     }
   }
+  &--start {
+    border: 1px solid rgb(120, 120, 120);
+    &:hover,
+    &:focus {
+      background: rgb(30, 30, 30);
+      color: white;
+    }
+  }
 }
 
-.oc-line-map {
+.initiate {
+  margin-bottom: 1.5rem;
+}
+
+.map-container {
   border: 9px solid hsla(33, 55%, 97%, 1);
   border-radius: 5px;
+  margin: 0 auto;
   max-width: 95vw;
+  & img {
+    max-width: 90vw;
+  }
 }
 
 .messages {
@@ -107,6 +125,20 @@ h1 {
 
 footer {
   font-size: 0.8em;
-  color: rgb(150, 150, 150);
   padding-bottom: 1.25em;
+}
+
+// for desktops
+
+@media (min-width: 768px) {
+  .select-js-method,
+  .js-method-buttons {
+    flex-direction: row;
+  }
+  .messages {
+    margin: 1vw auto;
+  }
+  footer {
+    padding-bottom: 1.5em;
+  }
 }
