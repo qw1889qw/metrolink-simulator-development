@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Oceanside",
+    "minutes": 0
+  },
+  {
+    "name": "San Clemente",
+    "minutes": 22
+  },
+  {
+    "name": "San Juan Capistrano",
+    "minutes": 9
+  },
+  {
+    "name": "Laguna Niguel/Mission Viejo",
+    "minutes": 6
+  },
+  {
+    "name": "Irvine",
+    "minutes": 11
+  },
+  {
+    "name": "Tustin",
+    "minutes": 6
+  },
+  {
+    "name": "Santa Ana",
+    "minutes": 6
+  },
+  {
+    "name": "Orange",
+    "minutes": 5
+  },
+  {
+    "name": "Anaheim",
+    "minutes": 5
+  },
+  {
+    "name": "Fullerton",
+    "minutes": 7
+  },
+  {
+    "name": "Buena Park",
+    "minutes": 6
+  },
+  {
+    "name": "Norwalk/Santa Fe Springs",
+    "minutes": 8
+  },
+  {
+    "name": "Commerce",
+    "minutes": 14
+  },
+  {
+    "name": "L.A. Union Station",
+    "minutes": 21
+  }
+]
