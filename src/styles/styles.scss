@@ -141,7 +141,7 @@ input[type="radio"] {
 
 .messages {
   background: hsla(33, 55%, 97%, 1);
-  width: 90vw;
+  max-width: 95vw;
   min-height: 25vh;
   padding: 0.25em;
   margin: 2vw auto;
