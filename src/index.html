@@ -21,9 +21,12 @@
         <div class="select-js-method">
           <p>choose a method of simulation, then click start:</p>
           <div class="js-method-buttons">
-            <button class="button button--bad">callback hell</button>
-            <button class="button button--better">Promises</button>
-            <button class="button button--better">async/await</button>
+            <input type="radio" value="cb" name="method" id="radio-cb">
+            <label for="radio-cb" class="label label--bad">callback hell</label>
+            <input type="radio" value="promise" name="method" id="radio-promise">
+            <label for="radio-promise" class="label label--better">Promises</label>
+            <input type="radio" value="async" name="method" id="radio-async">
+            <label for="radio-async" class="label label--better">async/await</label>
           </div>
         </div>
         <div class="initiate">
