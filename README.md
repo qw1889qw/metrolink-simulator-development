@@ -7,4 +7,5 @@ credit to [Chen Hui Jing's post](https://blog.bitsrc.io/customise-radio-buttons-
 **notes:**
 - data taken from [this page on Metrolink's site](https://metrolinktrains.com/schedules/?type=line&lineName=Orange+County+Line)
 - times based on train #607 inbound to Union Station on weekdays
+- 1 second of simulation = 2 minutes of real-time travel
 - very little shade @ Metrolink intended; just a fun little project
