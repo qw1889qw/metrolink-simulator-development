@@ -1,5 +1,6 @@
 import './styles/styles.scss';
 import map from './assets/metrolink-orangecounty.png';
+import './scripts/functions';
 
 const img = document.createElement('img');
 img.classList.add('oc-line-map');

@@ -29,6 +29,14 @@ module.exports = {
         use: [
           'url-loader'
         ]
+      },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          'eslint-loader'
+        ]
       }
     ]
   },
