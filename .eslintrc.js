@@ -12,6 +12,7 @@ module.exports = {
     SharedArrayBuffer: 'readonly'
   },
   extends: [
-    'airbnb-base'
+    'airbnb-base',
+    'plugin:prettier/recommended'
   ]
 };
