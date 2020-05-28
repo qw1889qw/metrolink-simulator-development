@@ -10,7 +10,7 @@ import {
 const stations = require('../assets/stations.json');
 
 const rtToSim = mins => (mins * 1000 * 60) / 360; // change back to dividing by 120 later
-/* const failChanceForAll = 0.25; */
+const failChanceForAll = 0.25;
 
 const breakDown = () => {
   addMessage("sorry, but we're currently experiencing difficulties. please wait, we'll be moving again shortly"); // eslint-disable-line
@@ -26,7 +26,7 @@ const reachOceanside = cb => {
 const reachSanClemente = (mins, cb) => {
   setTimeout(() => {
     // change to 0.25 later
-    if (Math.random() < 1) {
+    if (Math.random() < failChanceForAll) {
       breakDown();
       setTimeout(() => {
         addMessage(`the train has reached ${stations[1].name}.`);
@@ -41,7 +41,7 @@ const reachSanClemente = (mins, cb) => {
 
 const reachSJC = (mins, cb) => {
   setTimeout(() => {
-    if (Math.random() < 1) {
+    if (Math.random() < failChanceForAll) {
       breakDown();
       setTimeout(() => {
         addMessage(`the train has reached ${stations[2].name}.`);
@@ -56,7 +56,7 @@ const reachSJC = (mins, cb) => {
 
 const reachLagunaNiguel = (mins, cb) => {
   setTimeout(() => {
-    if (Math.random() < 1) {
+    if (Math.random() < failChanceForAll) {
       breakDown();
       setTimeout(() => {
         addMessage(`the train has reached ${stations[3].name}.`);
@@ -71,7 +71,7 @@ const reachLagunaNiguel = (mins, cb) => {
 
 const reachIrvine = (mins, cb) => {
   setTimeout(() => {
-    if (Math.random() < 1) {
+    if (Math.random() < failChanceForAll) {
       breakDown();
       setTimeout(() => {
         addMessage(`the train has reached ${stations[4].name}.`);
@@ -86,7 +86,7 @@ const reachIrvine = (mins, cb) => {
 
 const reachTustin = (mins, cb) => {
   setTimeout(() => {
-    if (Math.random() < 1) {
+    if (Math.random() < failChanceForAll) {
       breakDown();
       setTimeout(() => {
         addMessage(`the train has reached ${stations[5].name}.`);
@@ -101,7 +101,7 @@ const reachTustin = (mins, cb) => {
 
 const reachSantaAna = (mins, cb) => {
   setTimeout(() => {
-    if (Math.random() < 1) {
+    if (Math.random() < failChanceForAll) {
       breakDown();
       setTimeout(() => {
         addMessage(`the train has reached ${stations[6].name}.`);
@@ -116,7 +116,7 @@ const reachSantaAna = (mins, cb) => {
 
 const reachOrange = (mins, cb) => {
   setTimeout(() => {
-    if (Math.random() < 1) {
+    if (Math.random() < failChanceForAll) {
       breakDown();
       setTimeout(() => {
         addMessage(`the train has reached ${stations[7].name}.`);
@@ -131,7 +131,7 @@ const reachOrange = (mins, cb) => {
 
 const reachAnaheim = (mins, cb) => {
   setTimeout(() => {
-    if (Math.random() < 1) {
+    if (Math.random() < failChanceForAll) {
       breakDown();
       setTimeout(() => {
         addMessage(`the train has reached ${stations[8].name}.`);
@@ -146,7 +146,7 @@ const reachAnaheim = (mins, cb) => {
 
 const reachFullerton = (mins, cb) => {
   setTimeout(() => {
-    if (Math.random() < 1) {
+    if (Math.random() < failChanceForAll) {
       breakDown();
       setTimeout(() => {
         addMessage(`the train has reached ${stations[9].name}.`);
@@ -161,7 +161,7 @@ const reachFullerton = (mins, cb) => {
 
 const reachBuenaPark = (mins, cb) => {
   setTimeout(() => {
-    if (Math.random() < 1) {
+    if (Math.random() < failChanceForAll) {
       breakDown();
       setTimeout(() => {
         addMessage(`the train has reached ${stations[10].name}.`);
@@ -176,7 +176,7 @@ const reachBuenaPark = (mins, cb) => {
 
 const reachNorwalk = (mins, cb) => {
   setTimeout(() => {
-    if (Math.random() < 1) {
+    if (Math.random() < failChanceForAll) {
       breakDown();
       setTimeout(() => {
         addMessage(`the train has reached ${stations[11].name}.`);
@@ -191,7 +191,7 @@ const reachNorwalk = (mins, cb) => {
 
 const reachCommerce = (mins, cb) => {
   setTimeout(() => {
-    if (Math.random() < 1) {
+    if (Math.random() < failChanceForAll) {
       breakDown();
       setTimeout(() => {
         addMessage(`the train has reached ${stations[12].name}.`);
@@ -206,7 +206,7 @@ const reachCommerce = (mins, cb) => {
 
 const reachLA = mins => {
   setTimeout(() => {
-    if (Math.random() < 1) {
+    if (Math.random() < failChanceForAll) {
       breakDown();
       setTimeout(() => {
         addMessage(
@@ -248,7 +248,6 @@ const takeTrainCallbacks = () => {
     });
   });
 };
-/* takeTrainCallbacks(); */
 
 // Promises
 
@@ -269,6 +268,7 @@ const reachStationPromise = (failChance, station, minsCurrent, minsNext) => {
           resolve(rtToSim(minsNext));
         }, 1000);
       } else {
+        addMessage(`the train has reached ${station}.`);
         resolve(rtToSim(minsNext));
       }
     }, minsCurrent);
@@ -278,7 +278,7 @@ const reachStationPromise = (failChance, station, minsCurrent, minsNext) => {
 const reachLAPromise = mins => {
   return new Promise(resolve => {
     setTimeout(() => {
-      if (Math.random() < 1) {
+      if (Math.random() < failChanceForAll) {
         breakDown();
         setTimeout(() => {
           resolve(
@@ -298,7 +298,7 @@ const takeTrainPromises = () => {
   reachOceansidePromise()
     .then(time => {
       return reachStationPromise(
-        1,
+        failChanceForAll,
         stations[1].name,
         time,
         stations[2].minutes
@@ -306,7 +306,7 @@ const takeTrainPromises = () => {
     })
     .then(time => {
       return reachStationPromise(
-        1,
+        failChanceForAll,
         stations[2].name,
         time,
         stations[3].minutes
@@ -314,7 +314,7 @@ const takeTrainPromises = () => {
     })
     .then(time => {
       return reachStationPromise(
-        1,
+        failChanceForAll,
         stations[3].name,
         time,
         stations[4].minutes
@@ -322,7 +322,7 @@ const takeTrainPromises = () => {
     })
     .then(time => {
       return reachStationPromise(
-        1,
+        failChanceForAll,
         stations[4].name,
         time,
         stations[5].minutes
@@ -330,7 +330,7 @@ const takeTrainPromises = () => {
     })
     .then(time => {
       return reachStationPromise(
-        1,
+        failChanceForAll,
         stations[5].name,
         time,
         stations[6].minutes
@@ -338,7 +338,7 @@ const takeTrainPromises = () => {
     })
     .then(time => {
       return reachStationPromise(
-        1,
+        failChanceForAll,
         stations[6].name,
         time,
         stations[7].minutes
@@ -346,7 +346,7 @@ const takeTrainPromises = () => {
     })
     .then(time => {
       return reachStationPromise(
-        1,
+        failChanceForAll,
         stations[7].name,
         time,
         stations[8].minutes
@@ -354,7 +354,7 @@ const takeTrainPromises = () => {
     })
     .then(time => {
       return reachStationPromise(
-        1,
+        failChanceForAll,
         stations[8].name,
         time,
         stations[9].minutes
@@ -362,7 +362,7 @@ const takeTrainPromises = () => {
     })
     .then(time => {
       return reachStationPromise(
-        1,
+        failChanceForAll,
         stations[9].name,
         time,
         stations[10].minutes
@@ -370,7 +370,7 @@ const takeTrainPromises = () => {
     })
     .then(time => {
       return reachStationPromise(
-        1,
+        failChanceForAll,
         stations[10].name,
         time,
         stations[11].minutes
@@ -378,7 +378,7 @@ const takeTrainPromises = () => {
     })
     .then(time => {
       return reachStationPromise(
-        1,
+        failChanceForAll,
         stations[11].name,
         time,
         stations[12].minutes
@@ -386,7 +386,7 @@ const takeTrainPromises = () => {
     })
     .then(time => {
       return reachStationPromise(
-        1,
+        failChanceForAll,
         stations[12].name,
         time,
         stations[13].minutes
@@ -395,80 +395,79 @@ const takeTrainPromises = () => {
     .then(reachLAPromise)
     .then(addMessage);
 };
-/* takeTrainPromises(); */
 
 // async/await
 
 const takeTrainAsync = async () => {
   const timeAfterStation1 = await reachOceansidePromise();
   const timeAfterStation2 = await reachStationPromise(
-    1,
+    failChanceForAll,
     stations[1].name,
     timeAfterStation1,
     stations[2].minutes
   );
   const timeAfterStation3 = await reachStationPromise(
-    1,
+    failChanceForAll,
     stations[2].name,
     timeAfterStation2,
     stations[3].minutes
   );
   const timeAfterStation4 = await reachStationPromise(
-    1,
+    failChanceForAll,
     stations[3].name,
     timeAfterStation3,
     stations[4].minutes
   );
   const timeAfterStation5 = await reachStationPromise(
-    1,
+    failChanceForAll,
     stations[4].name,
     timeAfterStation4,
     stations[5].minutes
   );
   const timeAfterStation6 = await reachStationPromise(
-    1,
+    failChanceForAll,
     stations[5].name,
     timeAfterStation5,
     stations[6].minutes
   );
   const timeAfterStation7 = await reachStationPromise(
-    1,
+    failChanceForAll,
     stations[6].name,
     timeAfterStation6,
     stations[7].minutes
   );
   const timeAfterStation8 = await reachStationPromise(
-    1,
+    failChanceForAll,
     stations[7].name,
     timeAfterStation7,
     stations[8].minutes
   );
   const timeAfterStation9 = await reachStationPromise(
-    1,
+    failChanceForAll,
     stations[8].name,
     timeAfterStation8,
     stations[9].minutes
   );
   const timeAfterStation10 = await reachStationPromise(
-    1,
+    failChanceForAll,
     stations[9].name,
     timeAfterStation9,
     stations[10].minutes
   );
   const timeAfterStation11 = await reachStationPromise(
-    1,
+    failChanceForAll,
     stations[10].name,
     timeAfterStation10,
     stations[11].minutes
   );
   const timeAfterStation12 = await reachStationPromise(
-    1,
+    failChanceForAll,
     stations[11].name,
     timeAfterStation11,
     stations[12].minutes
   );
   const timeAfterStation13 = await reachStationPromise(
-    1,
+    failChanceForAll,
     stations[12].name,
     timeAfterStation12,
     stations[13].minutes
@@ -476,7 +475,6 @@ const takeTrainAsync = async () => {
   const lastMessage = await reachLAPromise(timeAfterStation13);
   addMessage(lastMessage);
 };
-/* takeTrainAsync(); */
 
 const startRiding = () => {
   createInnerMessageDiv();
