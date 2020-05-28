@@ -1,10 +1,10 @@
 const stations = require('../assets/stations.json');
 
-const rtToSim = mins => mins * 1000 * 60 / 360; // change back to dividing by 120 later
-const failChance = 0.25;
+const rtToSim = mins => (mins * 1000 * 60) / 360; // change back to dividing by 120 later
+/* const failChanceForAll = 0.25; */
 
 const breakDown = () => {
-  console.log("sorry, but we're currently experiencing difficulties. please wait, we'll be moving again shortly");
+  console.log("sorry, but we're currently experiencing difficulties. please wait, we'll be moving again shortly"); // eslint-disable-line
 };
 
 // callback hell
@@ -16,7 +16,8 @@ const reachOceanside = cb => {
 
 const reachSanClemente = (mins, cb) => {
   setTimeout(() => {
-    if (Math.random() < 1) { // change to 0.25 later
+    // change to 0.25 later
+    if (Math.random() < 1) {
       breakDown();
       setTimeout(() => {
         console.log(`the train has reached ${stations[1].name}.`);
@@ -199,28 +200,32 @@ const reachLA = mins => {
     if (Math.random() < 1) {
       breakDown();
       setTimeout(() => {
-        console.log(`the train has reached ${stations[13].name}. thanks for riding with us today, and we hope to see you again soon!`);
+        console.log(
+          `the train has reached ${stations[13].name}. thanks for riding with us today, and we hope to see you again soon!`
+        );
       }, 1000);
     } else {
-      console.log(`the train has reached ${stations[13].name}. thanks for riding with us today, and we hope to see you again soon!`);
+      console.log(
+        `the train has reached ${stations[13].name}. thanks for riding with us today, and we hope to see you again soon!`
+      );
     }
   }, mins);
 };
 
 const takeTrainCallbacks = () => {
-  reachOceanside(time => { // time = rtToSim(22)
-    reachSanClemente(time, time => { // time = rtToSim(9)
-      reachSJC(time, time => { // time = rtToSim(6)
-        reachLagunaNiguel(time, time => { // time = rtToSim(11)
-          reachIrvine(time, time => { // time = rtToSim(6)
-            reachTustin(time, time => { // time = rtToSim(6)
-              reachSantaAna(time, time => { // time = rtToSim(5)
-                reachOrange(time, time => { // time = rtToSim(5)
-                  reachAnaheim(time, time => { // time = rtToSim(7)
-                    reachFullerton(time, time => { // time = rtToSim(6)
-                      reachBuenaPark(time, time => { // time = rtToSim(8)
-                        reachNorwalk(time, time => { // time = rtToSim(14)
-                          reachCommerce(time, time => reachLA(time)); // time = rtToSim(21)
+  reachOceanside(time1 => {
+    reachSanClemente(time1, time2 => {
+      reachSJC(time2, time3 => {
+        reachLagunaNiguel(time3, time4 => {
+          reachIrvine(time4, time5 => {
+            reachTustin(time5, time6 => {
+              reachSantaAna(time6, time7 => {
+                reachOrange(time7, time8 => {
+                  reachAnaheim(time8, time9 => {
+                    reachFullerton(time9, time10 => {
+                      reachBuenaPark(time10, time11 => {
+                        reachNorwalk(time11, time12 => {
+                          reachCommerce(time12, time13 => reachLA(time13));
                         });
                       });
                     });
@@ -239,14 +244,14 @@ const takeTrainCallbacks = () => {
 // Promises
 
 const reachOceansidePromise = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     console.log(`the train has reached ${stations[0].name}.`);
     resolve(rtToSim(stations[1].minutes));
   });
 };
 
 const reachStationPromise = (failChance, station, minsCurrent, minsNext) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     setTimeout(() => {
       if (Math.random() < failChance) {
         breakDown();
@@ -262,15 +267,19 @@ const reachStationPromise = (failChance, station, minsCurrent, minsNext) => {
 };
 
 const reachLAPromise = mins => {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     setTimeout(() => {
       if (Math.random() < 1) {
         breakDown();
         setTimeout(() => {
-          resolve(`the train has reached ${stations[13].name}. thanks for riding with us today, and we hope to see you again soon!`);
+          resolve(
+            `the train has reached ${stations[13].name}. thanks for riding with us today, and we hope to see you again soon!`
+          );
         }, 1000);
       } else {
-        resolve(`the train has reached ${stations[13].name}. thanks for riding with us today, and we hope to see you again soon!`);
+        resolve(
+          `the train has reached ${stations[13].name}. thanks for riding with us today, and we hope to see you again soon!`
+        );
       }
     }, mins);
   });
@@ -278,18 +287,42 @@ const reachLAPromise = mins => {
 
 const takeTrainPromises = () => {
   reachOceansidePromise()
-    .then(time => reachStationPromise(1, stations[1].name, time, stations[2].minutes))
-    .then(time => reachStationPromise(1, stations[2].name, time, stations[3].minutes))
-    .then(time => reachStationPromise(1, stations[3].name, time, stations[4].minutes))
-    .then(time => reachStationPromise(1, stations[4].name, time, stations[5].minutes))
-    .then(time => reachStationPromise(1, stations[5].name, time, stations[6].minutes))
-    .then(time => reachStationPromise(1, stations[6].name, time, stations[7].minutes))
-    .then(time => reachStationPromise(1, stations[7].name, time, stations[8].minutes))
-    .then(time => reachStationPromise(1, stations[8].name, time, stations[9].minutes))
-    .then(time => reachStationPromise(1, stations[9].name, time, stations[10].minutes))
-    .then(time => reachStationPromise(1, stations[10].name, time, stations[11].minutes))
-    .then(time => reachStationPromise(1, stations[11].name, time, stations[12].minutes))
-    .then(time => reachStationPromise(1, stations[12].name, time, stations[13].minutes))
+    .then(time => {
+      reachStationPromise(1, stations[1].name, time, stations[2].minutes);
+    })
+    .then(time => {
+      reachStationPromise(1, stations[2].name, time, stations[3].minutes);
+    })
+    .then(time => {
+      reachStationPromise(1, stations[3].name, time, stations[4].minutes);
+    })
+    .then(time => {
+      reachStationPromise(1, stations[4].name, time, stations[5].minutes);
+    })
+    .then(time => {
+      reachStationPromise(1, stations[5].name, time, stations[6].minutes);
+    })
+    .then(time => {
+      reachStationPromise(1, stations[6].name, time, stations[7].minutes);
+    })
+    .then(time => {
+      reachStationPromise(1, stations[7].name, time, stations[8].minutes);
+    })
+    .then(time => {
+      reachStationPromise(1, stations[8].name, time, stations[9].minutes);
+    })
+    .then(time => {
+      reachStationPromise(1, stations[9].name, time, stations[10].minutes);
+    })
+    .then(time => {
+      reachStationPromise(1, stations[10].name, time, stations[11].minutes);
+    })
+    .then(time => {
+      reachStationPromise(1, stations[11].name, time, stations[12].minutes);
+    })
+    .then(time => {
+      reachStationPromise(1, stations[12].name, time, stations[13].minutes);
+    })
     .then(reachLAPromise)
     .then(console.log);
 };
@@ -299,18 +332,78 @@ const takeTrainPromises = () => {
 
 const takeTrainAsync = async () => {
   const timeAfterStation1 = await reachOceansidePromise();
-  const timeAfterStation2 = await reachStationPromise(1, stations[1].name, timeAfterStation1, stations[2].minutes);
-  const timeAfterStation3 = await reachStationPromise(1, stations[2].name, timeAfterStation2, stations[3].minutes);
-  const timeAfterStation4 = await reachStationPromise(1, stations[3].name, timeAfterStation3, stations[4].minutes);
-  const timeAfterStation5 = await reachStationPromise(1, stations[4].name, timeAfterStation4, stations[5].minutes);
-  const timeAfterStation6 = await reachStationPromise(1, stations[5].name, timeAfterStation5, stations[6].minutes);
-  const timeAfterStation7 = await reachStationPromise(1, stations[6].name, timeAfterStation6, stations[7].minutes);
-  const timeAfterStation8 = await reachStationPromise(1, stations[7].name, timeAfterStation7, stations[8].minutes);
-  const timeAfterStation9 = await reachStationPromise(1, stations[8].name, timeAfterStation8, stations[9].minutes);
-  const timeAfterStation10 = await reachStationPromise(1, stations[9].name, timeAfterStation9, stations[10].minutes);
-  const timeAfterStation11 = await reachStationPromise(1, stations[10].name, timeAfterStation10, stations[11].minutes);
-  const timeAfterStation12 = await reachStationPromise(1, stations[11].name, timeAfterStation11, stations[12].minutes);
-  const timeAfterStation13 = await reachStationPromise(1, stations[12].name, timeAfterStation12, stations[13].minutes);
+  const timeAfterStation2 = await reachStationPromise(
+    1,
+    stations[1].name,
+    timeAfterStation1,
+    stations[2].minutes
+  );
+  const timeAfterStation3 = await reachStationPromise(
+    1,
+    stations[2].name,
+    timeAfterStation2,
+    stations[3].minutes
+  );
+  const timeAfterStation4 = await reachStationPromise(
+    1,
+    stations[3].name,
+    timeAfterStation3,
+    stations[4].minutes
+  );
+  const timeAfterStation5 = await reachStationPromise(
+    1,
+    stations[4].name,
+    timeAfterStation4,
+    stations[5].minutes
+  );
+  const timeAfterStation6 = await reachStationPromise(
+    1,
+    stations[5].name,
+    timeAfterStation5,
+    stations[6].minutes
+  );
+  const timeAfterStation7 = await reachStationPromise(
+    1,
+    stations[6].name,
+    timeAfterStation6,
+    stations[7].minutes
+  );
+  const timeAfterStation8 = await reachStationPromise(
+    1,
+    stations[7].name,
+    timeAfterStation7,
+    stations[8].minutes
+  );
+  const timeAfterStation9 = await reachStationPromise(
+    1,
+    stations[8].name,
+    timeAfterStation8,
+    stations[9].minutes
+  );
+  const timeAfterStation10 = await reachStationPromise(
+    1,
+    stations[9].name,
+    timeAfterStation9,
+    stations[10].minutes
+  );
+  const timeAfterStation11 = await reachStationPromise(
+    1,
+    stations[10].name,
+    timeAfterStation10,
+    stations[11].minutes
+  );
+  const timeAfterStation12 = await reachStationPromise(
+    1,
+    stations[11].name,
+    timeAfterStation11,
+    stations[12].minutes
+  );
+  const timeAfterStation13 = await reachStationPromise(
+    1,
+    stations[12].name,
+    timeAfterStation12,
+    stations[13].minutes
+  );
   const lastMessage = await reachLAPromise(timeAfterStation13);
   console.log(lastMessage);
 };
