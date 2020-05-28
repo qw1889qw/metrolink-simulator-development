@@ -12,8 +12,9 @@ import {
 
 const stations = require('../assets/stations.json');
 
-const rtToSim = mins => (mins * 1000 * 60) / 360; // change back to dividing by 120 later
+const rtToSim = mins => (mins * 1000 * 60) / 120;
 const failChanceForAll = 0.25;
+const breakDownDelay = rtToSim(20); // every time train breaks down, simulate 20 minutes of delay
 
 const breakDown = () => {
   addMessage("sorry, but we're currently experiencing difficulties. please wait, we'll be moving again shortly"); // eslint-disable-line
@@ -28,13 +29,12 @@ const reachOceanside = cb => {
 
 const reachSanClemente = (mins, cb) => {
   setTimeout(() => {
-    // change to 0.25 later
     if (Math.random() < failChanceForAll) {
       breakDown();
       setTimeout(() => {
         addMessage(`the train has reached ${stations[1].name}.`);
         cb(rtToSim(stations[2].minutes));
-      }, 1000); // change to 10000 later
+      }, breakDownDelay);
     } else {
       addMessage(`the train has reached ${stations[1].name}.`);
       cb(rtToSim(stations[2].minutes));
@@ -49,7 +49,7 @@ const reachSJC = (mins, cb) => {
       setTimeout(() => {
         addMessage(`the train has reached ${stations[2].name}.`);
         cb(rtToSim(stations[3].minutes));
-      }, 1000);
+      }, breakDownDelay);
     } else {
       addMessage(`the train has reached ${stations[2].name}.`);
       cb(rtToSim(stations[3].minutes));
@@ -64,7 +64,7 @@ const reachLagunaNiguel = (mins, cb) => {
       setTimeout(() => {
         addMessage(`the train has reached ${stations[3].name}.`);
         cb(rtToSim(stations[4].minutes));
-      }, 1000);
+      }, breakDownDelay);
     } else {
       addMessage(`the train has reached ${stations[3].name}.`);
       cb(rtToSim(stations[4].minutes));
@@ -79,7 +79,7 @@ const reachIrvine = (mins, cb) => {
       setTimeout(() => {
         addMessage(`the train has reached ${stations[4].name}.`);
         cb(rtToSim(stations[5].minutes));
-      }, 1000);
+      }, breakDownDelay);
     } else {
       addMessage(`the train has reached ${stations[4].name}.`);
       cb(rtToSim(stations[5].minutes));
@@ -94,7 +94,7 @@ const reachTustin = (mins, cb) => {
       setTimeout(() => {
         addMessage(`the train has reached ${stations[5].name}.`);
         cb(rtToSim(stations[6].minutes));
-      }, 1000);
+      }, breakDownDelay);
     } else {
       addMessage(`the train has reached ${stations[5].name}.`);
       cb(rtToSim(stations[6].minutes));
@@ -109,7 +109,7 @@ const reachSantaAna = (mins, cb) => {
       setTimeout(() => {
         addMessage(`the train has reached ${stations[6].name}.`);
         cb(rtToSim(stations[7].minutes));
-      }, 1000);
+      }, breakDownDelay);
     } else {
       addMessage(`the train has reached ${stations[6].name}.`);
       cb(rtToSim(stations[7].minutes));
@@ -124,7 +124,7 @@ const reachOrange = (mins, cb) => {
       setTimeout(() => {
         addMessage(`the train has reached ${stations[7].name}.`);
         cb(rtToSim(stations[8].minutes));
-      }, 1000);
+      }, breakDownDelay);
     } else {
       addMessage(`the train has reached ${stations[7].name}.`);
       cb(rtToSim(stations[8].minutes));
@@ -139,7 +139,7 @@ const reachAnaheim = (mins, cb) => {
       setTimeout(() => {
         addMessage(`the train has reached ${stations[8].name}.`);
         cb(rtToSim(stations[9].minutes));
-      }, 1000);
+      }, breakDownDelay);
     } else {
       addMessage(`the train has reached ${stations[8].name}.`);
       cb(rtToSim(stations[9].minutes));
@@ -154,7 +154,7 @@ const reachFullerton = (mins, cb) => {
       setTimeout(() => {
         addMessage(`the train has reached ${stations[9].name}.`);
         cb(rtToSim(stations[10].minutes));
-      }, 1000);
+      }, breakDownDelay);
     } else {
       addMessage(`the train has reached ${stations[9].name}.`);
       cb(rtToSim(stations[10].minutes));
@@ -169,7 +169,7 @@ const reachBuenaPark = (mins, cb) => {
       setTimeout(() => {
         addMessage(`the train has reached ${stations[10].name}.`);
         cb(rtToSim(stations[11].minutes));
-      }, 1000);
+      }, breakDownDelay);
     } else {
       addMessage(`the train has reached ${stations[10].name}.`);
       cb(rtToSim(stations[11].minutes));
@@ -184,7 +184,7 @@ const reachNorwalk = (mins, cb) => {
       setTimeout(() => {
         addMessage(`the train has reached ${stations[11].name}.`);
         cb(rtToSim(stations[12].minutes));
-      }, 1000);
+      }, breakDownDelay);
     } else {
       addMessage(`the train has reached ${stations[11].name}.`);
       cb(rtToSim(stations[12].minutes));
@@ -199,7 +199,7 @@ const reachCommerce = (mins, cb) => {
       setTimeout(() => {
         addMessage(`the train has reached ${stations[12].name}.`);
         cb(rtToSim(stations[13].minutes));
-      }, 1000);
+      }, breakDownDelay);
     } else {
       addMessage(`the train has reached ${stations[12].name}.`);
       cb(rtToSim(stations[13].minutes));
@@ -216,7 +216,7 @@ const reachLA = mins => {
           `the train has reached ${stations[13].name}. thanks for riding with us today, and we hope to see you again soon!`
         );
         promptRestart();
-      }, 1000);
+      }, breakDownDelay);
     } else {
       addMessage(
         `the train has reached ${stations[13].name}. thanks for riding with us today, and we hope to see you again soon!`
@@ -271,7 +271,7 @@ const reachStationPromise = (failChance, station, minsCurrent, minsNext) => {
         setTimeout(() => {
           addMessage(`the train has reached ${station}.`);
           resolve(rtToSim(minsNext));
-        }, 1000);
+        }, breakDownDelay);
       } else {
         addMessage(`the train has reached ${station}.`);
         resolve(rtToSim(minsNext));
@@ -289,7 +289,7 @@ const reachLAPromise = mins => {
           resolve(
             `the train has reached ${stations[13].name}. thanks for riding with us today, and we hope to see you again soon!`
           );
-        }, 1000);
+        }, breakDownDelay);
       } else {
         resolve(
           `the train has reached ${stations[13].name}. thanks for riding with us today, and we hope to see you again soon!`
@@ -496,6 +496,8 @@ const startRiding = () => {
   }
 };
 
+// i'd put these event listeners in dom.js but then startRiding would need to be there too
+// or startRiding could be imported into dom.js but that introduces circular dependencies
 startButton.addEventListener('click', () => {
   if (cbRadio.checked || promiseRadio.checked || asyncRadio.checked) {
     startRiding();
