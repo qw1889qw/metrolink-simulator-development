@@ -3,8 +3,11 @@ import {
   promiseRadio,
   asyncRadio,
   startButton,
+  restartButton,
   createInnerMessageDiv,
-  addMessage
+  addMessage,
+  promptRestart,
+  restart
 } from './dom';
 
 const stations = require('../assets/stations.json');
@@ -212,11 +215,13 @@ const reachLA = mins => {
         addMessage(
           `the train has reached ${stations[13].name}. thanks for riding with us today, and we hope to see you again soon!`
         );
+        promptRestart();
       }, 1000);
     } else {
       addMessage(
         `the train has reached ${stations[13].name}. thanks for riding with us today, and we hope to see you again soon!`
       );
+      promptRestart();
     }
   }, mins);
 };
@@ -393,7 +398,10 @@ const takeTrainPromises = () => {
       );
     })
     .then(reachLAPromise)
-    .then(addMessage);
+    .then(message => {
+      addMessage(message);
+      promptRestart();
+    });
 };
 
 // async/await
@@ -474,6 +482,7 @@ const takeTrainAsync = async () => {
   );
   const lastMessage = await reachLAPromise(timeAfterStation13);
   addMessage(lastMessage);
+  promptRestart();
 };
 
 const startRiding = () => {
@@ -493,3 +502,5 @@ startButton.addEventListener('click', () => {
     startButton.setAttribute('disabled', true);
   }
 });
+
+restartButton.addEventListener('click', restart);
