@@ -30,6 +30,7 @@ const addMessage = message => {
   const messageP = document.createElement('p');
   messageP.textContent = message;
   document.querySelector('.messages-inner').appendChild(messageP);
+  window.scrollTo(0, document.body.scrollHeight);
 };
 
 // to be used after arriving @ Union Station
