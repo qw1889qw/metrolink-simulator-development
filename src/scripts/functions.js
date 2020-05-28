@@ -207,19 +207,21 @@ const reachLA = mins => {
   }, mins);
 };
 
-/* reachOceanside(time => { // time = rtToSim(22)
-  reachSanClemente(time, time => { // time = rtToSim(9)
-    reachSJC(time, time => { // time = rtToSim(6)
-      reachLagunaNiguel(time, time => { // time = rtToSim(11)
-        reachIrvine(time, time => { // time = rtToSim(6)
-          reachTustin(time, time => { // time = rtToSim(6)
-            reachSantaAna(time, time => { // time = rtToSim(5)
-              reachOrange(time, time => { // time = rtToSim(5)
-                reachAnaheim(time, time => { // time = rtToSim(7)
-                  reachFullerton(time, time => { // time = rtToSim(6)
-                    reachBuenaPark(time, time => { // time = rtToSim(8)
-                      reachNorwalk(time, time => { // time = rtToSim(14)
-                        reachCommerce(time, time => reachLA(time)); // time = rtToSim(21)
+const takeTrainCallbacks = () => {
+  reachOceanside(time => { // time = rtToSim(22)
+    reachSanClemente(time, time => { // time = rtToSim(9)
+      reachSJC(time, time => { // time = rtToSim(6)
+        reachLagunaNiguel(time, time => { // time = rtToSim(11)
+          reachIrvine(time, time => { // time = rtToSim(6)
+            reachTustin(time, time => { // time = rtToSim(6)
+              reachSantaAna(time, time => { // time = rtToSim(5)
+                reachOrange(time, time => { // time = rtToSim(5)
+                  reachAnaheim(time, time => { // time = rtToSim(7)
+                    reachFullerton(time, time => { // time = rtToSim(6)
+                      reachBuenaPark(time, time => { // time = rtToSim(8)
+                        reachNorwalk(time, time => { // time = rtToSim(14)
+                          reachCommerce(time, time => reachLA(time)); // time = rtToSim(21)
+                        });
                       });
                     });
                   });
@@ -231,7 +233,8 @@ const reachLA = mins => {
       });
     });
   });
-}); */
+};
+/* takeTrainCallbacks(); */
 
 // Promises
 
@@ -273,25 +276,28 @@ const reachLAPromise = mins => {
   });
 };
 
-/* reachOceansidePromise()
-  .then(time => reachStationPromise(1, stations[1].name, time, stations[2].minutes))
-  .then(time => reachStationPromise(1, stations[2].name, time, stations[3].minutes))
-  .then(time => reachStationPromise(1, stations[3].name, time, stations[4].minutes))
-  .then(time => reachStationPromise(1, stations[4].name, time, stations[5].minutes))
-  .then(time => reachStationPromise(1, stations[5].name, time, stations[6].minutes))
-  .then(time => reachStationPromise(1, stations[6].name, time, stations[7].minutes))
-  .then(time => reachStationPromise(1, stations[7].name, time, stations[8].minutes))
-  .then(time => reachStationPromise(1, stations[8].name, time, stations[9].minutes))
-  .then(time => reachStationPromise(1, stations[9].name, time, stations[10].minutes))
-  .then(time => reachStationPromise(1, stations[10].name, time, stations[11].minutes))
-  .then(time => reachStationPromise(1, stations[11].name, time, stations[12].minutes))
-  .then(time => reachStationPromise(1, stations[12].name, time, stations[13].minutes))
-  .then(reachLAPromise)
-  .then(console.log); */
+const takeTrainPromises = () => {
+  reachOceansidePromise()
+    .then(time => reachStationPromise(1, stations[1].name, time, stations[2].minutes))
+    .then(time => reachStationPromise(1, stations[2].name, time, stations[3].minutes))
+    .then(time => reachStationPromise(1, stations[3].name, time, stations[4].minutes))
+    .then(time => reachStationPromise(1, stations[4].name, time, stations[5].minutes))
+    .then(time => reachStationPromise(1, stations[5].name, time, stations[6].minutes))
+    .then(time => reachStationPromise(1, stations[6].name, time, stations[7].minutes))
+    .then(time => reachStationPromise(1, stations[7].name, time, stations[8].minutes))
+    .then(time => reachStationPromise(1, stations[8].name, time, stations[9].minutes))
+    .then(time => reachStationPromise(1, stations[9].name, time, stations[10].minutes))
+    .then(time => reachStationPromise(1, stations[10].name, time, stations[11].minutes))
+    .then(time => reachStationPromise(1, stations[11].name, time, stations[12].minutes))
+    .then(time => reachStationPromise(1, stations[12].name, time, stations[13].minutes))
+    .then(reachLAPromise)
+    .then(console.log);
+};
+/* takeTrainPromises(); */
 
 // async/await
 
-const takeTrain = async () => {
+const takeTrainAsync = async () => {
   const timeAfterStation1 = await reachOceansidePromise();
   const timeAfterStation2 = await reachStationPromise(1, stations[1].name, timeAfterStation1, stations[2].minutes);
   const timeAfterStation3 = await reachStationPromise(1, stations[2].name, timeAfterStation2, stations[3].minutes);
@@ -308,4 +314,4 @@ const takeTrain = async () => {
   const lastMessage = await reachLAPromise(timeAfterStation13);
   console.log(lastMessage);
 };
-/* takeTrain(); */
+/* takeTrainAsync(); */
