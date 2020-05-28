@@ -2,6 +2,9 @@ import map from '../assets/metrolink-orangecounty.png';
 
 // elements in DOM from beginning
 const outerMessageDiv = document.querySelector('.messages');
+const cbRadio = document.getElementById('radio-cb');
+const promiseRadio = document.getElementById('radio-promise');
+const asyncRadio = document.getElementById('radio-async');
 const startButton = document.querySelector('.button--start');
 
 // add image to DOM when everything else has been parsed & loaded
@@ -21,10 +24,6 @@ const createInnerMessageDiv = () => {
   innerMessageDiv.classList.add('messages-inner');
   outerMessageDiv.appendChild(innerMessageDiv);
 };
-startButton.addEventListener('click', () => {
-  createInnerMessageDiv();
-  startButton.setAttribute('disabled', true);
-});
 
 const addMessage = message => {
   const messageP = document.createElement('p');
@@ -32,4 +31,11 @@ const addMessage = message => {
   document.querySelector('.messages-inner').appendChild(messageP);
 };
 
-export { createInnerMessageDiv, addMessage };
+export {
+  cbRadio,
+  promiseRadio,
+  asyncRadio,
+  startButton,
+  createInnerMessageDiv,
+  addMessage
+};
