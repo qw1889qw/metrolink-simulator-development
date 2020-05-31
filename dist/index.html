@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Metrolink simulator">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="main.css" rel="stylesheet">
+    <title>Metrolink Simulator</title>
+  </head>
+  <body>
+    <noscript>you need to have JS enabled to use this app</noscript>
+    <header>
+      <p>Metrolink Simulator</p>
+      <a href="https://github.com/qw1889qw/metrolink-simulator" rel="external">link to GitHub</a>
+    </header>
+    <main>
+      <article>
+        <h1>Metrolink Simulator</h1>
+        <p class="description">thinking about the good old days when i would take Metrolink up to LA. here you can experience what it’s like to take the Orange County Line from Oceanside to LA starting at 6:34am on a Monday. messages will show up in the box near the bottom of this page. all aboard and have a nice trip!</p>
+        <div class="select-js-method">
+          <p>choose a method of simulation, then click start:</p>
+          <div class="js-method-buttons">
+            <input type="radio" value="cb" name="method" id="radio-cb">
+            <label for="radio-cb" class="label label--bad">callback hell</label>
+            <input type="radio" value="promise" name="method" id="radio-promise">
+            <label for="radio-promise" class="label label--better">Promises</label>
+            <input type="radio" value="async" name="method" id="radio-async">
+            <label for="radio-async" class="label label--better">async/await</label>
+          </div>
+        </div>
+        <div class="initiate">
+          <button class="button button--start">start!</button>
+        </div>
+        <div class="map-container"></div>
+        <div class="messages">
+          <p>train status (will not stop at San Clemente Pier):</p>
+          <button class="button button--restart unclickable">go back to Oceanside & ride again?</button>
+        </div>
+      </article>
+    </main>
+    <footer>made by qw1889qw (dee&lt;3)</footer>
+    <script src="main.js"></script>
+  </body>
+</html>

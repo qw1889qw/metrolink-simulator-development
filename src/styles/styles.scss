@@ -2,6 +2,13 @@
 
 $test-border: 2px solid red;
 
+@mixin center-flex($direction: row) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
 *,
 ::before,
 ::after {
@@ -71,6 +78,7 @@ h1 {
   border: $test-border;
   border-radius: 3px;
   margin: 0.25em;
+  @include center-flex();
   &--bad {
     background: hsla(0, 100%, 97%, 1);
     border: 1px solid hsla(0, 100%, 80%, 1);
